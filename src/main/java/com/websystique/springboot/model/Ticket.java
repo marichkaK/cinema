@@ -16,10 +16,10 @@ public class Ticket {
     private Long Id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "movie_session_place_id", nullable = false)
+    @JoinColumn(name = "movie_session_place_id")
     private MovieSessionPlaceData movieSessionPlaceData;
 }

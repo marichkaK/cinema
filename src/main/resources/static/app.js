@@ -11,7 +11,7 @@ app.config(['$stateProvider', '$urlRouterProvider',
         $stateProvider
             .state('home', {
                 url: '/',
-                templateUrl: 'partials/list',
+                templateUrl: 'partials/list.html',
                 controller:'UserController',
                 controllerAs:'ctrl',
                 resolve: {

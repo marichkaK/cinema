@@ -18,11 +18,11 @@ public class Session {
     private Long Id;
 
     @ManyToOne
-    @JoinColumn(name = "movie_hall_id",  nullable = false)
+    @JoinColumn(name = "movie_hall_id")
     private MovieHall movieHall;
 
     @ManyToOne
-    @JoinColumn(name = "movie_id",  nullable = false)
+    @JoinColumn(name = "movie_id")
     private Movie movie;
 
     @Column(name = "session_time",  nullable = false)

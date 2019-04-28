@@ -1,7 +1,13 @@
+spring:
+  mvc:
+    view:
+      prefix: /partials/
+      suffix: .html
+
 ---
 server:
   port: 8080
-  contextPath: /SpringBootCRUDApp
+  contextPath:
 ---
 spring:
   profiles: local, default

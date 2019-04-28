@@ -2,7 +2,6 @@ package com.websystique.springboot.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,12 +16,12 @@ public class MovieHallPlace {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
-    @Column(name = "movie_hall_id", nullable = false)
-    private Long movieHallId;
+    @ManyToOne
+    @JoinColumn(name = "movie_hall_id")
+    private MovieHall movieHall;
 
-    @Column(name = "row", nullable = false)
-    private Integer row;
+    @Column(name = "row_for_seat", nullable = false)
+    private Integer rowForSeat;
 
     @Column(name = "seat", nullable = false)
     private Integer seat;
