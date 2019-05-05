@@ -1,0 +1,19 @@
+<div class="generic-container">
+    <div class="panel panel-default">
+        <div class="panel-heading"><span class="lead">List of Movies</span></div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table" show-filter="true" ng-table="tableParams">
+                    <tr ng-repeat="u in $data">
+                        <td data-title="'name'" filter="{ 'name': 'text' }" sortable="'name'">
+                            {{u.name}}
+                        </td>
+                        <td data-title="'startDate'" filter="{ 'startDate': 'text' }" sortable="'startDate'">
+                            {{u.startDate | date}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

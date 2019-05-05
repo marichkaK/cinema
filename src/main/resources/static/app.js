@@ -1,8 +1,9 @@
-var app = angular.module('crudApp',['ui.router','ngStorage']);
+var app = angular.module('app',['ui.router','ngStorage', 'ngTable']);
 
 app.constant('urls', {
-    BASE: 'http://localhost:8080/SpringBootCRUDApp',
-    USER_SERVICE_API : 'http://localhost:8080/SpringBootCRUDApp/api/user/'
+    BASE: 'http://localhost:8080/',
+    USER_SERVICE_API : 'http://localhost:8080/api/user/',
+    MOVIE_SERVICE_API : 'http://localhost:8080/api/movies/'
 });
 
 app.config(['$stateProvider', '$urlRouterProvider',
@@ -11,17 +12,14 @@ app.config(['$stateProvider', '$urlRouterProvider',
         $stateProvider
             .state('home', {
                 url: '/',
-                templateUrl: 'partials/list.html',
-                controller:'UserController',
-                controllerAs:'ctrl',
-                resolve: {
-                    users: function ($q, UserService) {
-                        console.log('Load all users');
-                        var deferred = $q.defer();
-                        UserService.loadAllUsers().then(deferred.resolve, deferred.resolve);
-                        return deferred.promise;
-                    }
-                }
+                templateUrl: 'partials/MovieList.html',
+                controller:'MovieController',
+                controllerAs:'ctrl'
+            })
+            .state('home1', {
+                url: '/statistics',
+                templateUrl: 'partials/MovieStatistic.html',
+                controller:'MovieController'
             });
         $urlRouterProvider.otherwise('/');
     }]);

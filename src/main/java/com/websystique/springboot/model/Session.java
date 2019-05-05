@@ -2,6 +2,8 @@ package com.websystique.springboot.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+import org.springframework.data.jpa.convert.threetenbp.ThreeTenBackPortJpaConverters;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,7 +11,7 @@ import java.util.List;
 
 @Data
 @EqualsAndHashCode
-@Entity
+@Entity(name = "Session")
 @Table(name = "session")
 public class Session {
 
@@ -26,6 +28,7 @@ public class Session {
     private Movie movie;
 
     @Column(name = "session_time",  nullable = false)
+    @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime sessionTime;
 
     @OneToMany(mappedBy = "session")

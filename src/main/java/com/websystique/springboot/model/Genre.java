@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Data
 @EqualsAndHashCode
-@Entity
+@Entity(name = "Genre")
 @Table(name = "genre")
 public class Genre {
 

@@ -1,0 +1,30 @@
+<div class="generic-container">
+    <div class="panel panel-default">
+        <div class="panel-heading"><span class="lead">Statistic of Movies</span></div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <input type="number" ng-model="age">
+                <input type="number" ng-model="topMoviesNum">
+                <button ng-click="getTheMostSalableMovies()" >Submit</button>
+                <table class="table">
+                    <tr>
+                        <th>Movie Name</th>
+                        <th>Start Date</th>
+                        <th>Total tickets</th>
+                    </tr>
+                    <tr ng-repeat="u in moviesByAge">
+                        <td>
+                            {{u.name}}
+                        </td>
+                        <td>
+                            {{u.startDate | date}}
+                        </td>
+                        <td>
+                            {{u.numOfTickets}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,13 +2,12 @@ package com.websystique.springboot.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 
 @Data
 @EqualsAndHashCode
-@Entity
+@Entity(name = "User")
 @Table(name = "user")
 public class User {
 
