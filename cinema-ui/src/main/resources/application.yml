@@ -1,0 +1,16 @@
+spring:
+  mvc:
+    view:
+      prefix: /partials/
+      suffix: .html
+
+---
+server:
+  port: 8080
+  contextPath: /ui/
+
+---
+
+app:
+  urls:
+    api: http://localhost:8081
