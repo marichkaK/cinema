@@ -1,11 +1,10 @@
 package com.websystique.springboot.configuration;
 
+import com.zaxxer.hikari.HikariDataSource;
 import java.util.Properties;
-
 import javax.naming.NamingException;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,12 +23,8 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.zaxxer.hikari.HikariDataSource;
-
 @Configuration
-@EnableJpaRepositories(basePackages = "com.websystique.springboot.repositories",
-		entityManagerFactoryRef = "entityManagerFactory",
-		transactionManagerRef = "transactionManager")
+@EnableJpaRepositories(basePackages = "com.websystique.springboot.repositories")
 @EnableTransactionManagement
 public class JpaConfiguration {
 
