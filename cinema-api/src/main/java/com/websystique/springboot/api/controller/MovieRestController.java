@@ -27,7 +27,7 @@ public class MovieRestController {
 
     @GetMapping
     public List<MovieDto> getMovies() {
-        List<Movie> movies = movieService.findAllMovie();
+        List<Movie> movies = movieService.findAllMovies();
         return movies.stream()
             .map(Movie::toDto)
             .collect(Collectors.toList());

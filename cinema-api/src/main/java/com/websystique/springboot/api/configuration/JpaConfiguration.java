@@ -8,9 +8,9 @@ import javax.sql.DataSource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -52,7 +52,7 @@ public class JpaConfiguration {
     @Bean
     public DataSource dataSource() {
         DataSourceProperties dataSourceProperties = dataSourceProperties();
-        HikariDataSource dataSource = (HikariDataSource) DataSourceBuilder
+        HikariDataSource dataSource = DataSourceBuilder
             .create(dataSourceProperties.getClassLoader())
             .driverClassName(dataSourceProperties.getDriverClassName())
             .url(dataSourceProperties.getUrl())

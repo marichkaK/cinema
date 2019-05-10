@@ -18,28 +18,7 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
-    public Movie findById(Long id) {
-        return movieRepository.findOne(id);
-    }
-
-    public Movie findByName(String name) {
-        return movieRepository.findByName(name);
-    }
-
-    public void deleteMovieById(Long id) {
-        movieRepository.delete(id);
-    }
-
-    public void deleteAllMovies() {
-        movieRepository.deleteAll();
-    }
-
-    public List<Movie> findAllMovie() {
+    public List<Movie> findAllMovies() {
         return movieRepository.findAll();
     }
-
-    public boolean isMovieExist(Movie movie) {
-        return findByName(movie.getName()) != null;
-    }
-
 }
