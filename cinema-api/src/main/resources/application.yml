@@ -4,30 +4,14 @@ eureka:
       default-zone: http://localhost:8761/eureka
 
 server:
-  application:
-    name: cinema-api-service
   port: 8081
   servlet:
     context-path:
----
+
 spring:
-  profiles: local, default
-datasource:
-  sampleapp:
-    url: jdbc:h2:~/test
-    username: SA
-    password:
-    driverClassName: org.h2.Driver
-    defaultSchema:
-    maxPoolSize: 10
-    hibernate:
-      hbm2ddl.method: create-drop
-      show_sql: true
-      format_sql: true
-      dialect: org.hibernate.dialect.H2Dialect
----
-spring:
-  profiles: prod
+  application:
+    name: cinema-api-service
+
 datasource:
   sampleapp:
     url: jdbc:mysql://localhost:3306/movie_db1?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
