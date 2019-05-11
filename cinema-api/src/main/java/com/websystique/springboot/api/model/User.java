@@ -11,15 +11,19 @@ import javax.persistence.*;
 @Table(name = "user")
 public class User {
 
+    public static final String CURRENT_USER = "current_user_attribute";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "AGE", nullable = false)
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @Column(name = "age", nullable = false)
     private Integer age;
 
 }

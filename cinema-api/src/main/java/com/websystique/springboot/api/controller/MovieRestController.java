@@ -3,6 +3,7 @@ package com.websystique.springboot.api.controller;
 import com.websystique.springboot.api.dto.MovieDto;
 import com.websystique.springboot.api.dto.MovieModelDto;
 import com.websystique.springboot.api.model.Movie;
+import com.websystique.springboot.api.model.User;
 import com.websystique.springboot.api.service.MovieService;
 import com.websystique.springboot.api.service.TicketService;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,7 +32,7 @@ public class MovieRestController {
     }
 
     @GetMapping
-    public List<MovieDto> getMovies(HttpServletRequest request) {
+    public List<MovieDto> getMovies(HttpServletRequest request, @RequestAttribute(User.CURRENT_USER) User user) {
         List<Movie> movies = movieService.findAllMovies();
         return movies.stream()
             .map(Movie::toDto)
