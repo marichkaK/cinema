@@ -3,6 +3,8 @@ package com.websystique.springboot.api.model;
 import static com.websystique.springboot.api.util.DateConverter.convertToDateViaSqlTimestamp;
 
 import com.websystique.springboot.api.dto.MovieDto;
+import com.websystique.springboot.api.dto.MovieModelDto;
+import com.websystique.springboot.api.util.DateConverter;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Column;
@@ -16,11 +18,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 @Data
+@Builder
 @EqualsAndHashCode
 @Entity(name = "Movie")
 @Table(name = "movie")
@@ -71,5 +75,20 @@ public class Movie {
 
     public MovieDto toDto() {
         return new MovieDto(name, convertToDateViaSqlTimestamp(startDate));
+    }
+
+    public MovieModelDto toMovieDto() {
+        return MovieModelDto.builder()
+            .name(name)
+            .duration(duration)
+            .format(format.toString())
+            .minAge(minAge)
+            .year(year)
+            .country(country)
+            .description(description)
+            .startDate(DateConverter.convertToDateViaSqlTimestamp(startDate))
+            .endDate(DateConverter.convertToDateViaSqlTimestamp(endDate))
+            .logoPath(logoPath)
+            .build();
     }
 }

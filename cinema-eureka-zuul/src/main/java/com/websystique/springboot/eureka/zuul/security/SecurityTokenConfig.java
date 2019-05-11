@@ -36,6 +36,7 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
             .addFilterAfter(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
             // authorization requests config
             .authorizeRequests()
+            .antMatchers("/actuator/**").permitAll()
             // allow all who are accessing "auth" service
             .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
             // must be an admin if trying to access admin area (authentication is also required here)

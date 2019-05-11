@@ -1,13 +1,17 @@
 package com.websystique.springboot.api.controller;
 
 import com.websystique.springboot.api.dto.MovieDto;
+import com.websystique.springboot.api.dto.MovieModelDto;
 import com.websystique.springboot.api.model.Movie;
 import com.websystique.springboot.api.service.MovieService;
 import com.websystique.springboot.api.service.TicketService;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/movies")
 public class MovieRestController {
 
-    private final MovieService movieService; //Service which will do all data retrieval/manipulation work
+    private final MovieService movieService;
     private final TicketService ticketService;
 
     @Autowired
@@ -26,11 +30,18 @@ public class MovieRestController {
     }
 
     @GetMapping
-    public List<MovieDto> getMovies() {
+    public List<MovieDto> getMovies(HttpServletRequest request) {
         List<Movie> movies = movieService.findAllMovies();
         return movies.stream()
             .map(Movie::toDto)
             .collect(Collectors.toList());
+    }
+
+    @PostMapping
+    public MovieDto createMovie(@RequestBody MovieModelDto movieDto) {
+        Movie movie = movieService.createMovie(movieDto);
+
+        return movie.toDto();
     }
 
     @GetMapping("/filter")

@@ -33,8 +33,14 @@
     </dependency>
 
     <dependency>
-      <groupId>com.zaxxer</groupId>
-      <artifactId>HikariCP</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>io.micrometer</groupId>
+          <artifactId>micrometer-core</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
