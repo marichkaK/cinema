@@ -7,6 +7,7 @@ import com.websystique.springboot.api.dto.MovieModelDto;
 import com.websystique.springboot.api.util.DateConverter;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -15,15 +16,21 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @EqualsAndHashCode
 @Entity(name = "Movie")
@@ -41,7 +48,7 @@ public class Movie {
     private Integer duration;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "format", length = 2)
+    @Column(name = "format", length = 20)
     private Format format;
 
     @Column(name = "minAge", nullable = false)
@@ -53,7 +60,7 @@ public class Movie {
     @Column(name = "country")
     private String country;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 2048)
     private String description;
 
     @Column(name = "startDate")
@@ -71,10 +78,14 @@ public class Movie {
     private List<Session> sessions;
 
     @ManyToMany
+    @JoinTable(
+        name = "movie_genres",
+        joinColumns = @JoinColumn(name = "movie_id"),
+        inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private List<Genre> genres;
 
     public MovieDto toDto() {
-        return new MovieDto(name, convertToDateViaSqlTimestamp(startDate));
+        return new MovieDto(id, name, convertToDateViaSqlTimestamp(startDate));
     }
 
     public MovieModelDto toMovieDto() {
@@ -89,6 +100,7 @@ public class Movie {
             .startDate(DateConverter.convertToDateViaSqlTimestamp(startDate))
             .endDate(DateConverter.convertToDateViaSqlTimestamp(endDate))
             .logoPath(logoPath)
+            .genres(genres.stream().map(Genre::getName).collect(Collectors.toList()))
             .build();
     }
 }

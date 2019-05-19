@@ -1,13 +1,16 @@
 package com.websystique.springboot.api.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
-public class GenreDto {
+@AllArgsConstructor
+public class MovieHallPlaceDto {
 
-    private String name;
+    private Integer rowForSeat;
+    private Integer seat;
 }

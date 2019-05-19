@@ -4,10 +4,16 @@ import com.websystique.springboot.api.model.projection.MovieTotalProjection;
 import com.websystique.springboot.api.util.DateConverter;
 import java.time.LocalDateTime;
 import java.util.Date;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class MovieDto {
+
+    private Long id;
 
     private String name;
 
@@ -15,7 +21,8 @@ public class MovieDto {
 
     private Integer numOfTickets;
 
-    public MovieDto(String name, Date startDate) {
+    public MovieDto(Long id, String name, Date startDate) {
+        this.id = id;
         this.name = name;
         this.startDate = startDate;
     }

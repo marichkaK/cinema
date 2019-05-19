@@ -3,14 +3,17 @@ package com.websystique.springboot.api.dto;
 import com.websystique.springboot.api.model.Format;
 import com.websystique.springboot.api.model.Movie;
 import com.websystique.springboot.api.util.DateConverter;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MovieModelDto {
 
     private String name;

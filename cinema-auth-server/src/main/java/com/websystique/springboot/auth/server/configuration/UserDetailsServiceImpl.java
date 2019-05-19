@@ -30,6 +30,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username)
         throws UsernameNotFoundException {
 
+        // TODO: 2019-05-15 read users from DB
         final List<AppUser> users = Arrays.asList(
             new AppUser(1, "omar", passwordEncoder.encode("12345"), "USER"),
             new AppUser(2, "admin", passwordEncoder.encode("12345"), "ADMIN")

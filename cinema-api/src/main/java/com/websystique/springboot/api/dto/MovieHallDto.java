@@ -7,7 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GenreDto {
+public class MovieHallDto {
 
     private String name;
+    private Integer horizontalSeatsNumber;
+    private Integer verticalSeatsNumber;
+
+    public MovieHallDto(String name) {
+        this.name = name;
+    }
 }

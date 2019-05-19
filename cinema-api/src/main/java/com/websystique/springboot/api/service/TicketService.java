@@ -1,6 +1,9 @@
 package com.websystique.springboot.api.service;
 
 import com.websystique.springboot.api.dto.MovieDto;
+import com.websystique.springboot.api.model.MovieSessionPlaceData;
+import com.websystique.springboot.api.model.Ticket;
+import com.websystique.springboot.api.model.User;
 import com.websystique.springboot.api.model.projection.MovieTotalProjection;
 import com.websystique.springboot.api.repository.TicketRepository;
 import java.util.ArrayList;
@@ -16,10 +19,12 @@ public class TicketService {
 
 
     private final TicketRepository ticketRepository;
+    private final MovieSessionPlaceDataService movieSessionPlaceDataService;
 
     @Autowired
-    public TicketService(TicketRepository ticketRepository) {
+    public TicketService(TicketRepository ticketRepository, MovieSessionPlaceDataService movieSessionPlaceDataService) {
         this.ticketRepository = ticketRepository;
+        this.movieSessionPlaceDataService = movieSessionPlaceDataService;
     }
 
     public List<MovieDto> getTheMostSalableMoviesForAge(Integer age, Integer topNumberOfMovies) {
@@ -31,5 +36,12 @@ public class TicketService {
             movieDtos.add(movieDto);
         }
         return movieDtos;
+    }
+
+    public Ticket buyTicket(Long movieSessionPlaceDataId, User user) {
+        MovieSessionPlaceData movieSessionPlaceData
+            = movieSessionPlaceDataService.getMovieSessionPlaceData(movieSessionPlaceDataId);
+
+        return ticketRepository.save(new Ticket(user, movieSessionPlaceData));
     }
 }

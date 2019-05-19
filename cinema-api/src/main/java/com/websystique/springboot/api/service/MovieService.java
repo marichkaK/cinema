@@ -34,4 +34,8 @@ public class MovieService {
 
         return movieRepository.save(movie);
     }
+
+    public Movie getMovie(Long id) {
+        return movieRepository.getOne(id);
+    }
 }
