@@ -43,10 +43,10 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
 
             .and()
 
-            .antMatcher(jwtConfig.getUri())
+            .antMatcher(jwtConfig.getAuthUri())
                 .authorizeRequests()
             .antMatchers("/actuator/**").permitAll()
-            .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
+            .antMatchers(HttpMethod.POST, jwtConfig.getAuthUri()).permitAll()
             .anyRequest().authenticated()
 
             .and()

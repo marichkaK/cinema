@@ -20,6 +20,9 @@ public class JwtConfig {
     @Value("${security.jwt.uri:/auth/**}")
     private String uri;
 
+    @Value("${security.jwt.uri:/auth/authenticate}")
+    private String authUri;
+
     @Value("${security.jwt.header:Authorization}")
     private String header;
 
