@@ -1,4 +1,4 @@
-package com.websystique.springboot.auth.server.configuration;
+package com.websystique.springboot.auth.server.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.websystique.springboot.common.security.JwtConfig;
@@ -50,7 +50,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                 creds.getUsername(), creds.getPassword(), Collections.emptyList());
 
-            // 3. Authentication manager authenticate the user, and use UserDetialsServiceImpl::loadUserByUsername() method to load the user.
+            // 3. Authentication manager authenticate the user, and use UserDetailsServiceImpl::loadUserByUsername() method to load the user.
             return authManager.authenticate(authToken);
 
         } catch (IOException e) {
