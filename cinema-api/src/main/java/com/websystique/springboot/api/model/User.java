@@ -1,5 +1,6 @@
 package com.websystique.springboot.api.model;
 
+import com.websystique.springboot.messaging.common.UserDto;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,4 +37,10 @@ public class User {
     @Column(name = "age", nullable = false)
     private Integer age;
 
+    public UserDto toKafkaDto() {
+        return UserDto.builder()
+            .id(id)
+            .age(age)
+            .build();
+    }
 }

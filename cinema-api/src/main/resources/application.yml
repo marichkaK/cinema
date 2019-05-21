@@ -11,6 +11,15 @@ server:
 spring:
   application:
     name: cinema-api-service
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: http://localhost:9092
+      bindings:
+        cinema-client-ticket-out:
+          destination: cinema-client-ticket
+          contentType: application/json
 
 datasource:
   sampleapp:

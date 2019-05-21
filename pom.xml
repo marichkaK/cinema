@@ -12,6 +12,8 @@
     <module>cinema-common</module>
     <module>cinema-eureka-server</module>
     <module>cinema-eureka-zuul</module>
+    <module>cinema-ticket-ingestor</module>
+    <module>cinema-messaging-common</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -25,6 +27,7 @@
 
   <properties>
     <spring-cloud.version>Finchley.M9</spring-cloud.version>
+    <spring-cloud-stream.version>Ditmars.SR5</spring-cloud-stream.version>
     <java.version>1.11</java.version>
     <h2.version>1.4.187</h2.version>
     <cinema.project.version>1.0.0</cinema.project.version>
@@ -32,10 +35,6 @@
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
@@ -80,6 +79,11 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-security</artifactId>
         <version>${springframework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        <version>2.1.5.RELEASE</version>
       </dependency>
       <dependency>
         <groupId>org.springframework.security.oauth</groupId>

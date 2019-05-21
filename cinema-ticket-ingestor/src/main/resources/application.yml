@@ -1,0 +1,25 @@
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+
+server:
+  port: 8082
+
+mongo:
+  host: localhost
+  port: 27017
+  database-name: cinema
+
+spring:
+  application:
+    name: cinema-ticket-ingestor-service
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: http://localhost:9092
+      bindings:
+        cinema-client-ticket-in:
+          destination: cinema-client-ticket
+          contentType: application/json

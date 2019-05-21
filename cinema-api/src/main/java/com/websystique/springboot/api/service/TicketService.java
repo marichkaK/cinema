@@ -1,6 +1,7 @@
 package com.websystique.springboot.api.service;
 
 import com.websystique.springboot.api.dto.MovieDto;
+import com.websystique.springboot.api.messaging.service.TicketStreamService;
 import com.websystique.springboot.api.model.MovieSessionPlaceData;
 import com.websystique.springboot.api.model.Ticket;
 import com.websystique.springboot.api.model.User;
@@ -17,14 +18,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TicketService {
 
-
     private final TicketRepository ticketRepository;
     private final MovieSessionPlaceDataService movieSessionPlaceDataService;
+    private final TicketStreamService ticketStreamService;
 
     @Autowired
-    public TicketService(TicketRepository ticketRepository, MovieSessionPlaceDataService movieSessionPlaceDataService) {
+    public TicketService(
+        TicketRepository ticketRepository,
+        MovieSessionPlaceDataService movieSessionPlaceDataService,
+        TicketStreamService ticketStreamService) {
+
         this.ticketRepository = ticketRepository;
         this.movieSessionPlaceDataService = movieSessionPlaceDataService;
+        this.ticketStreamService = ticketStreamService;
     }
 
     public List<MovieDto> getTheMostSalableMoviesForAge(Integer age, Integer topNumberOfMovies) {
@@ -38,10 +44,15 @@ public class TicketService {
         return movieDtos;
     }
 
+    @Transactional
     public Ticket buyTicket(Long movieSessionPlaceDataId, User user) {
         MovieSessionPlaceData movieSessionPlaceData
             = movieSessionPlaceDataService.getMovieSessionPlaceData(movieSessionPlaceDataId);
 
-        return ticketRepository.save(new Ticket(user, movieSessionPlaceData));
+        Ticket ticket = ticketRepository.save(new Ticket(user, movieSessionPlaceData));
+
+        ticketStreamService.sendTicket(ticket);
+
+        return ticket;
     }
 }
