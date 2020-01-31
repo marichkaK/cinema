@@ -20,15 +20,16 @@ public class TicketStreamService {
 
     public boolean sendTicket(Ticket ticket) {
         TicketDto dto = TicketDto.builder()
-            .ticketId(ticket.getId())
-            .user(ticket.getUser().toKafkaDto())
-            .build();
+                .ticketId(ticket.getId())
+                .user(ticket.getUser().toKafkaDto())
+                .movieSessionPlaceDataKafkaDto(ticket.getMovieSessionPlaceData().toKafkaDto())
+                .build();
 
         MessageChannel messageChannel = ticketStream.writeTickets();
 
         return messageChannel.send(MessageBuilder
-            .withPayload(dto)
-            .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
-            .build());
+                .withPayload(dto)
+                .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
+                .build());
     }
 }

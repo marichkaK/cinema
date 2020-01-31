@@ -23,6 +23,9 @@ public class Ticket implements Persistable<String> {
     @Field
     private User user;
 
+    @Field
+    private MovieSessionPlaceData movieSessionPlaceData;
+
     @CreatedDate
     private Date creationTime;
 

@@ -1,20 +1,12 @@
 package com.websystique.springboot.api.model;
 
 import com.websystique.springboot.api.dto.MovieSessionPlaceDataDto;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
+import com.websystique.springboot.messaging.common.MovieSessionPlaceDataKafkaDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -59,5 +51,14 @@ public class MovieSessionPlaceData {
             .price(price)
             .status(status.toString())
             .build();
+    }
+
+
+    public MovieSessionPlaceDataKafkaDto toKafkaDto() {
+        return MovieSessionPlaceDataKafkaDto.builder()
+                .movieSessionPlaceDataId(id)
+                .price(price)
+                .sessionKafkaDto(session.toKafkaDto())
+                .build();
     }
 }

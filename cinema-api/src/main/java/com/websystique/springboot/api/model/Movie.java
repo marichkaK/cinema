@@ -21,6 +21,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.websystique.springboot.messaging.common.MovieKafkaDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -102,5 +104,14 @@ public class Movie {
             .logoPath(logoPath)
             .genres(genres.stream().map(Genre::getName).collect(Collectors.toList()))
             .build();
+    }
+
+    public MovieKafkaDto toKafkaDto(){
+        return MovieKafkaDto.builder()
+                .name(name)
+                .country(country)
+                .duration(duration)
+                .minAge(minAge)
+                .build();
     }
 }

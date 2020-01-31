@@ -23,7 +23,7 @@ public class TicketRestController {
     }
 
     @PostMapping("/places/{movieSessionPlaceDataId}/tickets")
-    public TicketDto createMovie(
+    public TicketDto createTicket(
         @PathVariable Long movieSessionPlaceDataId,
         @RequestAttribute(User.CURRENT_USER) User user) {
 

@@ -17,6 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.websystique.springboot.messaging.common.SessionKafkaDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -54,6 +56,13 @@ public class Session {
             .movie(movie.toDto())
             .sessionTime(DateConverter.convertToDateViaSqlTimestamp(sessionTime))
             .build();
+    }
+
+    public SessionKafkaDto toKafkaDto(){
+        return SessionKafkaDto.builder()
+                .id(id)
+                .movieKafkaDto(movie.toKafkaDto())
+                .build();
     }
 
     public FullSessionDto toFullSessionDto() {

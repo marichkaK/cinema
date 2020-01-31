@@ -15,4 +15,5 @@ public class TicketDto {
 
     private Long ticketId;
     private UserDto user;
+    private MovieSessionPlaceDataKafkaDto movieSessionPlaceDataKafkaDto;
 }
