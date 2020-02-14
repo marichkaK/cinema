@@ -2,6 +2,8 @@ package com.websystique.springboot.messaging.common;
 
 import lombok.*;
 
+import java.util.List;
+
 @Builder
 @Data
 @AllArgsConstructor
@@ -12,4 +14,5 @@ public class MovieKafkaDto {
     private Integer duration;
     private Integer minAge;
     private String country;
+    private List<String> genres;
 }

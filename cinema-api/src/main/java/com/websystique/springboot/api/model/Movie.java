@@ -1,34 +1,18 @@
 package com.websystique.springboot.api.model;
 
-import static com.websystique.springboot.api.util.DateConverter.convertToDateViaSqlTimestamp;
-
 import com.websystique.springboot.api.dto.MovieDto;
 import com.websystique.springboot.api.dto.MovieModelDto;
 import com.websystique.springboot.api.util.DateConverter;
+import com.websystique.springboot.messaging.common.MovieKafkaDto;
+import lombok.*;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
-import com.websystique.springboot.messaging.common.MovieKafkaDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+import static com.websystique.springboot.api.util.DateConverter.convertToDateViaSqlTimestamp;
 
 @Data
 @NoArgsConstructor
@@ -81,9 +65,9 @@ public class Movie {
 
     @ManyToMany
     @JoinTable(
-        name = "movie_genres",
-        joinColumns = @JoinColumn(name = "movie_id"),
-        inverseJoinColumns = @JoinColumn(name = "genre_id"))
+            name = "movie_genres",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private List<Genre> genres;
 
     public MovieDto toDto() {
@@ -92,26 +76,30 @@ public class Movie {
 
     public MovieModelDto toMovieDto() {
         return MovieModelDto.builder()
-            .name(name)
-            .duration(duration)
-            .format(format.toString())
-            .minAge(minAge)
-            .year(year)
-            .country(country)
-            .description(description)
-            .startDate(DateConverter.convertToDateViaSqlTimestamp(startDate))
-            .endDate(DateConverter.convertToDateViaSqlTimestamp(endDate))
-            .logoPath(logoPath)
-            .genres(genres.stream().map(Genre::getName).collect(Collectors.toList()))
-            .build();
+                .name(name)
+                .duration(duration)
+                .format(format.toString())
+                .minAge(minAge)
+                .year(year)
+                .country(country)
+                .description(description)
+                .startDate(DateConverter.convertToDateViaSqlTimestamp(startDate))
+                .endDate(DateConverter.convertToDateViaSqlTimestamp(endDate))
+                .logoPath(logoPath)
+                .genres(genres.stream().map(Genre::getName).collect(Collectors.toList()))
+                .build();
     }
 
-    public MovieKafkaDto toKafkaDto(){
+    public MovieKafkaDto toKafkaDto() {
+        List<String> genreTitles = genres.stream()
+                .map(Genre::getName)
+                .collect(Collectors.toList());
         return MovieKafkaDto.builder()
                 .name(name)
                 .country(country)
                 .duration(duration)
                 .minAge(minAge)
+                .genres(genreTitles)
                 .build();
     }
 }

@@ -14,6 +14,7 @@
     <module>cinema-eureka-zuul</module>
     <module>cinema-ticket-ingestor</module>
     <module>cinema-messaging-common</module>
+      <module>cinema-ticket-service</module>
   </modules>
   <packaging>pom</packaging>
 

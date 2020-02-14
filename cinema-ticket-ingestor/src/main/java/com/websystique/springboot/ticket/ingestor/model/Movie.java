@@ -4,6 +4,8 @@ import com.websystique.springboot.messaging.common.MovieKafkaDto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Builder
 public class Movie {
@@ -12,6 +14,7 @@ public class Movie {
     private Integer duration;
     private Integer minAge;
     private String country;
+    private List<String> genres;
 
     public static Movie toModel(MovieKafkaDto movieKafkaDto){
         return Movie.builder()
@@ -19,6 +22,7 @@ public class Movie {
                 .duration(movieKafkaDto.getDuration())
                 .minAge(movieKafkaDto.getMinAge())
                 .country(movieKafkaDto.getCountry())
+                .genres(movieKafkaDto.getGenres())
                 .build();
     }
 }
