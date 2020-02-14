@@ -27,6 +27,6 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
             Pageable pageable
     );
 
-    List<Ticket> getAllByMovieSessionPlaceData_SessionSessionTimeIsLessThan(LocalDateTime date);
+    List<Ticket> getAllByMovieSessionPlaceDataSessionSessionTimeIsLessThan(LocalDateTime date);
 
 }

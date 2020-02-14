@@ -69,7 +69,7 @@ public class TicketService {
     @Transactional
     public void deleteAllTicketsAndRelatedDataByTime(LocalDate localDateTime) {
         List<Ticket> tickets = ticketRepository
-                .getAllByMovieSessionPlaceData_SessionSessionTimeIsLessThan(localDateTime.atStartOfDay());
+                .getAllByMovieSessionPlaceDataSessionSessionTimeIsLessThan(localDateTime.atStartOfDay());
         Set<Long> sessionIds = new HashSet<>();
         for (Ticket t : tickets) {
             sessionIds.add(t.getMovieSessionPlaceData().getSession().getId());

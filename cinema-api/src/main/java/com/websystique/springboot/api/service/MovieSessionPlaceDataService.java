@@ -36,7 +36,7 @@ public class MovieSessionPlaceDataService {
     }
 
     public void deleteMovieSessionPlaceDatasBy(Set<Long> sessionId) {
-        movieSessionPlaceDataRepository.deleteAllBySession_IdIn(sessionId);
+        movieSessionPlaceDataRepository.deleteAllBySessionIdIn(sessionId);
     }
 
 }

@@ -8,5 +8,5 @@ import java.util.Set;
 
 @Repository
 public interface MovieSessionPlaceDataRepository extends JpaRepository<MovieSessionPlaceData, Long> {
-    void deleteAllBySession_IdIn(Set<Long> ids);
+    void deleteAllBySessionIdIn(Set<Long> ids);
 }
