@@ -5,15 +5,11 @@ import com.websystique.springboot.api.dto.NewSessionDto;
 import com.websystique.springboot.api.dto.SessionDto;
 import com.websystique.springboot.api.model.Session;
 import com.websystique.springboot.api.service.SessionService;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")

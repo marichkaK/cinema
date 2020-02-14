@@ -1,19 +1,17 @@
 package com.websystique.springboot.api.service;
 
 import com.websystique.springboot.api.dto.NewSessionDto;
-import com.websystique.springboot.api.model.Movie;
-import com.websystique.springboot.api.model.MovieHall;
-import com.websystique.springboot.api.model.MovieHallPlace;
-import com.websystique.springboot.api.model.MovieSessionPlaceData;
-import com.websystique.springboot.api.model.Session;
+import com.websystique.springboot.api.model.*;
 import com.websystique.springboot.api.repository.SessionRepository;
 import com.websystique.springboot.api.util.DateConverter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -25,12 +23,10 @@ public class SessionService {
     private final MovieSessionPlaceDataService movieSessionPlaceDataService;
 
     @Autowired
-    public SessionService(
-        SessionRepository sessionRepository,
-        MovieService movieService,
-        MovieHallService movieHallService,
-        MovieSessionPlaceDataService movieSessionPlaceDataService) {
-
+    public SessionService(SessionRepository sessionRepository,
+                          MovieService movieService,
+                          MovieHallService movieHallService,
+                          MovieSessionPlaceDataService movieSessionPlaceDataService) {
         this.sessionRepository = sessionRepository;
         this.movieService = movieService;
         this.movieHallService = movieHallService;
@@ -55,9 +51,9 @@ public class SessionService {
 
         List<MovieHallPlace> movieHallPlaces = movieHall.getMovieHallPlaces();
         Integer maxRowNumber = movieHallPlaces.stream()
-            .max(Comparator.comparing(MovieHallPlace::getRowForSeat))
-            .map(MovieHallPlace::getRowForSeat)
-            .orElseThrow();
+                .max(Comparator.comparing(MovieHallPlace::getRowForSeat))
+                .map(MovieHallPlace::getRowForSeat)
+                .orElseThrow();
 
         List<MovieSessionPlaceData> movieSessionPlaceData = new ArrayList<>();
         for (int i = 0; i < movieHallPlaces.size(); i++) {
@@ -77,6 +73,10 @@ public class SessionService {
         session.setMovieSessionPlaceData(movieSessionPlaceData);
 
         return session;
+    }
+
+    public void deleteById(Set<Long> ids) {
+        sessionRepository.deleteByIdIn(ids);
     }
 
     public Session getSession(Long id) {
